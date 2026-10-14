@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#17132e" />
+<title>A Little World Just for You ✨</title>
+<style>
+  :root { --night:#17132e; --lavender:#c9b8ff; --pink:#ffb8d0; --cream:#fff7fb; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    margin:0; min-height:100vh; color:var(--cream);
+    font-family: ui-rounded, "Trebuchet MS", system-ui, sans-serif;
+    background: radial-gradient(ellipse at 20% 15%, #45316e 0, transparent 42%),
+                radial-gradient(ellipse at 85% 75%, #542b59 0, transparent 40%),
+                linear-gradient(145deg,#111027,#211638 55%,#321d43);
+    overflow-x:hidden;
+  }
+  #stars { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+  .star { position:absolute; color:#fff; opacity:.65; animation:twinkle 3s ease-in-out infinite alternate; }
+  @keyframes twinkle { from { opacity:.18; transform:scale(.7); } to { opacity:.9; transform:scale(1.15); } }
+  @keyframes float { 0%,100% { transform:translateY(0) rotate(-4deg); } 50% { transform:translateY(-13px) rotate(4deg); } }
+  @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.07); } }
+  .wrap { position:relative; z-index:1; width:min(900px,92%); margin:auto; }
+  header { display:flex; justify-content:space-between; align-items:center; padding:22px 0; color:#e6dcff; font-size:.9rem; }
+  .brand { letter-spacing:.12em; text-transform:uppercase; font-size:.72rem; }
+  .tiny-heart { color:var(--pink); }
+  main { min-height:82vh; display:grid; place-items:center; padding:35px 0 65px; }
+  .hero { text-align:center; max-width:700px; }
+  .eyebrow { color:#e6c6ff; text-transform:uppercase; letter-spacing:.2em; font-size:.72rem; }
+  h1 { font-family: Georgia, "Times New Roman", serif; font-size:clamp(2.6rem,8vw,5.6rem); line-height:1.03; font-weight:500; margin:20px 0; }
+  h1 em { color:var(--pink); font-weight:400; }
+  .sub { color:#ded5f0; font-size:clamp(1rem,2.5vw,1.15rem); line-height:1.8; max-width:540px; margin:0 auto 28px; }
+  .orb { width:150px; height:150px; margin:0 auto 28px; display:grid; place-items:center; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#ffe6f2,#c6a7ff 35%,#7857a6 68%,#382a5a);
+    box-shadow:0 0 45px #c39cff55, inset -12px -15px 25px #21163866; animation:float 5s ease-in-out infinite; font-size:3.3rem; }
+  button { border:0; cursor:pointer; border-radius:999px; padding:14px 23px; font:inherit; font-weight:700; transition:transform .2s, box-shadow .2s; }
+  button:hover { transform:translateY(-2px); }
+  .primary { background:linear-gradient(110deg,#ffd0e2,#d8c6ff); color:#2a1c42; box-shadow:0 8px 25px #d8a7ff30; }
+  .secondary { color:#f7eaff; background:#ffffff10; border:1px solid #ffffff30; }
+  .hint { color:#b9adc9; font-size:.82rem; margin-top:15px; }
+  section { padding:65px 0; }
+  .section-head { text-align:center; margin-bottom:28px; }
+  h2 { font:500 clamp(2rem,5vw,3rem) Georgia,serif; margin:12px 0; }
+  .section-head p { color:#d0c4e2; line-height:1.7; }
+  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .card { background:#ffffff0b; border:1px solid #ffffff1b; border-radius:22px; padding:22px; min-height:155px; backdrop-filter:blur(8px); }
+  .card .emoji { font-size:1.8rem; }
+  .card h3 { font-size:1rem; margin:13px 0 8px; }
+  .card p { color:#d1c5e0; font-size:.9rem; line-height:1.6; margin:0; }
+  .note-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  .note { text-align:left; width:100%; min-height:100px; border-radius:18px; color:#fff3fb; background:linear-gradient(135deg,#ffffff12,#ffffff06); border:1px solid #ffffff20; padding:18px; }
+  .note span { display:block; color:#e8c5f6; font-size:.8rem; margin-top:7px; font-weight:400; }
+  .revealed { color:#ffe1ed; font-family:Georgia,serif; font-size:1.2rem; line-height:1.65; }
+  .letter { max-width:650px; margin:auto; padding:clamp(22px,5vw,42px); border:1px solid #ffffff28; border-radius:26px; background:linear-gradient(145deg,#ffffff12,#ffffff06); box-shadow:0 20px 70px #08051530; }
+  .letter p { color:#e4d9ed; line-height:1.9; }
+  .sign { color:var(--pink); font:italic 1.4rem Georgia,serif; }
+  .hidden { display:none !important; }
+  footer { text-align:center; padding:35px 0 50px; color:#b9adc9; font-size:.82rem; }
+  .confetti { position:fixed; z-index:5; pointer-events:none; animation:fall 2.8s linear forwards; }
+  @keyframes fall { to { transform:translateY(110vh) rotate(720deg); opacity:0; } }
+  @media (max-width:650px) { .grid { grid-template-columns:1fr; } .note-grid { grid-template-columns:1fr; } header { padding-top:18px; } .card { min-height:auto; } }
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<div class="wrap">
+  <header><div class="brand">✦ A tiny universe</div><div>made with <span class="tiny-heart">♥</span> for you</div></header>
+  <main id="home">
+    <div class="hero">
+      <div class="orb" aria-hidden="true">🎁</div>
+      <div class="eyebrow">a little something, just for you</div>
+      <h1>Hey, <em id="herName">you</em>.<br />This is your little universe.</h1>
+      <p class="sub">I made a tiny corner of the internet just for you. No matter how many miles are between us, I hope this makes you smile today.</p>
+      <button class="primary" onclick="openSurprise()">Open your surprise ✨</button>
+      <div class="hint">Psst… take your time. There are little things to discover.</div>
+    </div>
+  </main>
+
+  <div id="surprise" class="hidden">
+    <section>
+      <div class="section-head">
+        <div class="eyebrow">chapter one</div>
+        <h2>A few little reminders 🌙</h2>
+        <p>Some things deserve to be said more often.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><div class="emoji">🪐</div><h3>Distance is just distance</h3><p>It can change where we are, but it doesn't erase the laughs, the conversations, or the care.</p></article>
+        <article class="card"><div class="emoji">☁️</div><h3>You make days brighter</h3><p>I hope you know that your presence can make an ordinary day feel a little more special.</p></article>
+        <article class="card"><div class="emoji">🌷</div><h3>This is your reminder</h3><p>You deserve kindness, good surprises, peaceful days, and people who root for you.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div class="eyebrow">chapter two</div>
+        <h2>Little notes for you 💌</h2>
+        <p>Tap a note to open it. I left these here for whenever you need them.</p>
+      </div>
+      <div class="note-grid">
+        <button class="note" onclick="reveal(this,'You do not have to have everything figured out today. One step at a time is still progress.')">☁️ Open when your day feels heavy <span>tap to reveal a note ↗</span></button>
+        <button class="note" onclick="reveal(this,'Official reminder: you are allowed to rest, laugh at silly things, and take up space exactly as you are.')">🌼 Open when you need a smile <span>tap to reveal a note ↗</span></button>
+        <button class="note" onclick="reveal(this,'Even from far away, I am cheering for you. I hope something lovely finds you today.')">🌙 Open when you feel far away <span>tap to reveal a note ↗</span></button>
+        <button class="note" onclick="reveal(this,'Here is a tiny assignment: drink some water, unclench your shoulders, and remember that you matter. 💗')">💗 Open when you need a little care <span>tap to reveal a note ↗</span></button>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div class="eyebrow">the final little thing</div>
+        <h2>One last surprise 🎀</h2>
+        <p>Whenever you're ready, open the letter.</p>
+      </div>
+      <div style="text-align:center;margin-bottom:22px"><button class="primary" onclick="showLetter()">Open your letter 💌</button></div>
+      <div id="letter" class="letter hidden">
+        <div class="eyebrow">written from my side of the screen</div>
+        <h2>For you, <em id="letterName">my friend</em>.</h2>
+        <p>I know a screen can't replace being there in person, but I wanted to make you something you could keep and come back to.</p>
+        <p>Thank you for being you. I hope life gives you countless reasons to laugh, people who make you feel understood, and moments that remind you how wonderful you are.</p>
+        <p>Whenever the distance feels big, I hope this little page reminds you that someone, somewhere, took time out of their day to make you smile.</p>
+        <p>This website is small, but the thought behind it is real. I hope it made you smile. ✨</p>
+        <div class="sign">From your friend, with lots of love ♡</div>
+        <p style="font-size:.8rem;color:#b9adc9">P.S. This is your little corner of the internet. Come back whenever you like.</p>
+      </div>
+    </section>
+  </div>
+  <footer>made of stardust, a little code, and a lot of thought ✦</footer>
+</div>
+<script>
+  // PERSONALIZE THESE TWO LINES before sending the website:
+  const HER_NAME = "your favourite human";
+  const YOUR_NAME = "your friend";
+
+  document.getElementById("herName").textContent = HER_NAME;
+  document.getElementById("letterName").textContent = HER_NAME;
+
+  const stars = document.getElementById("stars");
+  for (let i=0; i<75; i++) {
+    const s=document.createElement("span");
+    s.className="star";
+    s.textContent = Math.random() > .75 ? "✦" : "·";
+    s.style.left=Math.random()*100+"%";
+    s.style.top=Math.random()*100+"%";
+    s.style.fontSize=(8+Math.random()*14)+"px";
+    s.style.animationDelay=(Math.random()*4)+"s";
+    stars.appendChild(s);
+  }
+  function openSurprise() {
+    document.getElementById("surprise").classList.remove("hidden");
+    document.getElementById("surprise").scrollIntoView({behavior:"smooth"});
+    burst();
+  }
+  function reveal(button, message) {
+    button.innerHTML = '<div class="revealed">“'+message+'”</div><span>♡ a little note for you</span>';
+  }
+  function showLetter() {
+    document.getElementById("letter").classList.remove("hidden");
+    document.getElementById("letter").scrollIntoView({behavior:"smooth",block:"center"});
+    burst();
+  }
+  function burst() {
+    const symbols=["✦","♥","✧","♡","✨"];
+    for(let i=0;i<24;i++){
+      const el=document.createElement("div"); el.className="confetti";
+      el.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+      el.style.left=Math.random()*100+"vw"; el.style.top="-20px";
+      el.style.fontSize=(14+Math.random()*18)+"px";
+      el.style.color=["#ffc8df","#d8c6ff","#fff0b8"][Math.floor(Math.random()*3)];
+      el.style.animationDelay=(Math.random()*.6)+"s";
+      document.body.appendChild(el); setTimeout(()=>el.remove(),3600);
+    }
+  }
+</script>
+</body>
+</html>
